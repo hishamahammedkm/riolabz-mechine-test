@@ -1,11 +1,13 @@
 import { Injectable } from '@nestjs/common';
+import { PrismaService } from 'src/prisma/prisma.service';
 import { CreatePageDto } from './dto/create-page.dto';
 import { UpdatePageDto } from './dto/update-page.dto';
 
 @Injectable()
 export class PageService {
+  constructor(private prisma: PrismaService) {}
   create(createPageDto: CreatePageDto) {
-    return 'This action adds a new page';
+    return "await this.prisma.page.create()"
   }
 
   findAll() {
