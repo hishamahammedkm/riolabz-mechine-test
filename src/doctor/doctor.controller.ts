@@ -10,25 +10,18 @@ import {
   UseGuards,
   Request,
 } from '@nestjs/common';
-import { AuthGuard } from '@nestjs/passport';
 
 import { DoctorService } from './doctor.service';
 import { CreateDoctorDto } from './dto/create-doctor.dto';
 import { UpdateDoctorDto } from './dto/update-doctor.dto';
-
+import { JwtGuard } from '../auth/guard';
+import { GetUser } from '../auth/decorator';
 @Controller('doctor')
 export class DoctorController {
-  constructor(
-    private readonly doctorService: DoctorService,
-  ) {}
+  constructor(private readonly doctorService: DoctorService) {}
 
-  
-  // @Post('auth/login')
-  // async login(@Request() req) {
-  //   return this.authService.login(req.user);
-  // }
-  // @UseGuards(JwtAuthGuard)
-  @Post()
+  @UseGuards(JwtGuard)
+  @Post('create')
   create(@Body() createDoctorDto: CreateDoctorDto) {
     return this.doctorService.create(createDoctorDto);
   }
@@ -47,21 +40,23 @@ export class DoctorController {
   findOne(@Param('slug') slug: string) {
     return this.doctorService.findOne(slug);
   }
-  // @UseGuards(JwtAuthGuard)
+  @UseGuards(JwtGuard)
   @Get('asu/:asu')
   findByAsu(@Param('asu') asu: string) {
     return this.doctorService.findByAsu(asu);
   }
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateDoctorDto: UpdateDoctorDto) {
-    return this.doctorService.update(+id, updateDoctorDto);
-  }
+  // @Patch(':id')
+  // update(@Param('id') id: string, @Body() updateDoctorDto: UpdateDoctorDto) {
+  //   return this.doctorService.update(+id, updateDoctorDto);
+  // }
 
-  // @UseGuards(JwtAuthGuard)
+  @UseGuards(JwtGuard)
   @Post('/updateProfile')
-  updateProfile(@Body() createDoctorDto: CreateDoctorDto) {
-    return this.doctorService.create(createDoctorDto);
+  updateProfile(
+    @Body() @Body() updateDoctorDto: UpdateDoctorDto,
+    @GetUser('id') doctorId: string,
+  ) {
+    return this.doctorService.updateProfile(updateDoctorDto,doctorId);
   }
-  
 }

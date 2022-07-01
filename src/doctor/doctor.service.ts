@@ -11,14 +11,14 @@ export class DoctorService {
     return 'This action adds a new doctor';
   }
 
-  async updateProfile(data:UpdateDoctorDto){
-    const {id,...rest} = data
+  async updateProfile(data:UpdateDoctorDto,doctorId:string){
+   
     return await this.prisma.doctor.update({
       where:{
-        id
+        id:doctorId
       },
       data:{
-        ...rest
+        ...data
       }
     })
   }
