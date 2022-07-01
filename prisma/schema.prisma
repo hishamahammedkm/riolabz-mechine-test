@@ -12,7 +12,7 @@ datasource db {
 
 model User {
   createdAt DateTime @default(now())
-  doctors   Doctor[]
+
   firstName String?
   id        String   @id @default(cuid())
   lastName  String?
@@ -30,9 +30,9 @@ model Doctor {
   hospital       String?
   id             String   @id @default(cuid())
   location       String?
-  login          User?    @relation(fields: [loginId], references: [id])
   loginId        String?
   name           String
+  password       String?
   phone          String?
   photo          String?
   qualifications String?

@@ -1,25 +1,56 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, Query } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+  Query,
+  UseGuards,
+  Request,
+} from '@nestjs/common';
+import { AuthGuard } from '@nestjs/passport';
+
 import { DoctorService } from './doctor.service';
 import { CreateDoctorDto } from './dto/create-doctor.dto';
 import { UpdateDoctorDto } from './dto/update-doctor.dto';
 
 @Controller('doctor')
 export class DoctorController {
-  constructor(private readonly doctorService: DoctorService) {}
+  constructor(
+    private readonly doctorService: DoctorService,
+  ) {}
 
+  
+  // @Post('auth/login')
+  // async login(@Request() req) {
+  //   return this.authService.login(req.user);
+  // }
+  // @UseGuards(JwtAuthGuard)
   @Post()
   create(@Body() createDoctorDto: CreateDoctorDto) {
     return this.doctorService.create(createDoctorDto);
   }
 
   @Get()
-  findAll(@Query('latitude')latitude:string) {
-    return this.doctorService.findAll(latitude);
+  findAll(
+    @Query('latitude') latitude?: string,
+    @Query('longitude') longitude?: string,
+    @Query('page') page?: number,
+    @Query('limit') limit?: number,
+  ) {
+    return this.doctorService.findAll(latitude, longitude, page, limit);
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.doctorService.findOne(+id);
+  @Get(':slug')
+  findOne(@Param('slug') slug: string) {
+    return this.doctorService.findOne(slug);
+  }
+  // @UseGuards(JwtAuthGuard)
+  @Get('asu/:asu')
+  findByAsu(@Param('asu') asu: string) {
+    return this.doctorService.findByAsu(asu);
   }
 
   @Patch(':id')
@@ -27,8 +58,10 @@ export class DoctorController {
     return this.doctorService.update(+id, updateDoctorDto);
   }
 
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.doctorService.remove(+id);
+  // @UseGuards(JwtAuthGuard)
+  @Post('/updateProfile')
+  updateProfile(@Body() createDoctorDto: CreateDoctorDto) {
+    return this.doctorService.create(createDoctorDto);
   }
+  
 }
