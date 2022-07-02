@@ -50,6 +50,17 @@ export class DoctorService {
       where: {
         slug,
       },
+      select:{
+        name: true,
+        photo: true,
+        hospital: true,
+        slug: true,
+        phone:true,
+        experience:true,
+        speciality:true,
+        qualifications:true,
+        location:true
+      }
     });
   }
 
