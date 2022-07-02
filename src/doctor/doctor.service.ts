@@ -12,7 +12,7 @@ export class DoctorService {
     return 'This action adds a new doctor';
   }
 
-  async updateProfile(data: UpdateDoctorDto, doctorId: number) {
+  async updateProfile(data: UpdateDoctorDto, doctorId?: number) {
    const {password,...rest} = data
    let hashedPassword:string
     if (password) {
@@ -26,7 +26,7 @@ export class DoctorService {
 
     return await this.prisma.doctor.update({
       where: {
-        id: doctorId,
+        id: rest.id,
       },
       data: {
         ...rest,
