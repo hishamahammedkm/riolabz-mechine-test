@@ -52,6 +52,7 @@ import {
           where: {
             asuNumber: dto.asuNumber,
           },
+          
         });
       // if user does not exist throw exception
       if (!doctor)
@@ -69,13 +70,17 @@ import {
         throw new ForbiddenException(
           'Credentials incorrect',
         );
-      return this.signToken(doctor.id, doctor.email);
+      return this.signToken(doctor.id, doctor.email,doctor.name,doctor.slug,doctor.photo,doctor.hospital);
     }
   
     async signToken(
       doctorId: number,
       email: string,
-    ): Promise<{ access_token: string }> {
+      name:string,
+      slug:string,
+      photo:string,
+      hospital:string
+    ): Promise<any> {
       const payload = {
         sub: doctorId,
         email,
@@ -92,6 +97,13 @@ import {
   
       return {
         access_token: token,
+        name,
+        slug,
+        photo,
+        hospital
+        
+
+
       };
     }
   }

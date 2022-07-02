@@ -26,7 +26,7 @@ export class DoctorService {
 
     return await this.prisma.doctor.update({
       where: {
-        id: rest.id,
+        id: rest.id || doctorId,
       },
       data: {
         ...rest,

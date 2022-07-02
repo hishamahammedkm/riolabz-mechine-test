@@ -58,12 +58,12 @@ export class DoctorController {
   //   return this.doctorService.update(+id, updateDoctorDto);
   // }
 
-  // @UseGuards(JwtGuard)
+  @UseGuards(JwtGuard)
   @Post('/updateProfile')
   updateProfile(
     @Body() @Body() updateDoctorDto: UpdateDoctorDto,
-    // @GetUser('id') doctorId: number,
+    @GetUser('id') doctorId: number,
   ) {
-    return this.doctorService.updateProfile(updateDoctorDto);
+    return this.doctorService.updateProfile(updateDoctorDto,doctorId);
   }
 }
