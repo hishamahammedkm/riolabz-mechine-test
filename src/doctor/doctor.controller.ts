@@ -64,8 +64,8 @@ export class DoctorController {
   @Post('/updateProfile')
   updateProfile(
     @Body() @Body() updateDoctorDto: UpdateDoctorDto,
-    @GetUser('id') doctorId: number,
+    // @GetUser('id') doctorId: number,
   ) {
-    return this.doctorService.updateProfile(updateDoctorDto,doctorId);
+    return this.doctorService.updateProfile(updateDoctorDto);
   }
 }
