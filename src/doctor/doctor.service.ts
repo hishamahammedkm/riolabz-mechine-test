@@ -11,16 +11,15 @@ export class DoctorService {
     return 'This action adds a new doctor';
   }
 
-  async updateProfile(data:UpdateDoctorDto,doctorId:string){
-   
+  async updateProfile(data: UpdateDoctorDto, doctorId: number) {
     return await this.prisma.doctor.update({
-      where:{
-        id:doctorId
+      where: {
+        id: doctorId,
       },
-      data:{
-        ...data
-      }
-    })
+      data: {
+        ...data,
+      },
+    });
   }
 
   async findAll(
@@ -35,31 +34,38 @@ export class DoctorService {
       take: limit,
       skip: limit * (page - 1),
       where: {},
+      select: {
+        name: true,
+        photo: true,
+        hospital: true,
+        slug: true,
+      },
     });
+
     return doctors;
   }
 
- async findOne(slug: string) {
+  async findOne(slug: string) {
     return await this.prisma.doctor.findFirst({
-      where:{
-        slug
-      }
+      where: {
+        slug,
+      },
     });
   }
 
   async findByAsu(asu: string) {
     return await this.prisma.doctor.findFirst({
-      where:{
-        asuNumber:asu
-      }
+      where: {
+        asuNumber: asu,
+      },
     });
   }
 
   async findDoctorByAsuNumber(asuNumber: string) {
     return await this.prisma.doctor.findFirst({
-      where:{
-        asuNumber
-      }
+      where: {
+        asuNumber,
+      },
     });
   }
 

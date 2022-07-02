@@ -26,14 +26,19 @@ export class DoctorController {
     return this.doctorService.create(createDoctorDto);
   }
 
-  @Get()
+  @Get('/all')
   findAll(
     @Query('latitude') latitude?: string,
     @Query('longitude') longitude?: string,
     @Query('page') page?: number,
     @Query('limit') limit?: number,
   ) {
-    return this.doctorService.findAll(latitude, longitude, page, limit);
+    return this.doctorService.findAll(
+      latitude,
+      longitude,
+      Number(page),
+      Number(limit),
+    );
   }
 
   @Get(':slug')
@@ -55,8 +60,8 @@ export class DoctorController {
   @Post('/updateProfile')
   updateProfile(
     @Body() @Body() updateDoctorDto: UpdateDoctorDto,
-    @GetUser('id') doctorId: string,
+    @GetUser('id') doctorId: number,
   ) {
-    return this.doctorService.updateProfile(updateDoctorDto,doctorId);
+    return this.doctorService.updateProfile(updateDoctorDto, doctorId);
   }
 }

@@ -23,14 +23,14 @@ model User {
 }
 
 model Doctor {
-  asuNumber      String   @unique
-  createdAt      DateTime @default(now())
-  email          String?
-  experience     String?
-  hospital       String?
-  id             String   @id @default(cuid())
-  location       String?
-  loginId        String?
+  asuNumber  String   @unique
+  createdAt  DateTime @default(now())
+  email      String?
+  experience String?
+  hospital   String?
+  id         Int      @id @default(autoincrement())
+  location   String?
+
   name           String
   password       String?
   phone          String?
@@ -38,7 +38,7 @@ model Doctor {
   qualifications String?
   slug           String?
   speciality     String?
-  updatedAt      DateTime @updatedAt
+  updatedAt      DateTime? @updatedAt
 }
 
 model Page {

@@ -73,7 +73,7 @@ import {
     }
   
     async signToken(
-      doctorId: string,
+      doctorId: number,
       email: string,
     ): Promise<{ access_token: string }> {
       const payload = {
