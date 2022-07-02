@@ -1,0 +1,22 @@
+version: "3.0"
+
+services:
+  server:
+    image: uro-server:latest      
+    depends_on:
+      - database
+    ports:
+      - 3000:3000      
+    env_file:
+      - .env    
+
+  database:
+    image: postgres:14
+    restart: unless-stopped
+    volumes:
+      - ./postgres/data/:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_USER=jamesbond
+      - POSTGRES_PASSWORD=bond007!
+    ports:
+      - 5432:5432
