@@ -45,6 +45,8 @@ export class DoctorController {
   findOne(@Param('slug') slug: string) {
     return this.doctorService.findOne(slug);
   }
+
+  
   @UseGuards(JwtGuard)
   @Get('asu/:asu')
   findByAsu(@Param('asu') asu: string) {

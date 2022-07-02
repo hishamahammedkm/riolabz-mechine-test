@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { CreateDoctorDto } from './dto/create-doctor.dto';
 import { UpdateDoctorDto } from './dto/update-doctor.dto';
+import * as argon from 'argon2';
 
 @Injectable()
 export class DoctorService {
@@ -12,12 +13,24 @@ export class DoctorService {
   }
 
   async updateProfile(data: UpdateDoctorDto, doctorId: number) {
+   const {password,...rest} = data
+   let hashedPassword:string
+    if (password) {
+      try {
+        hashedPassword = await argon.hash(password);
+
+      } catch (err) {
+        //...
+      }
+    }
+
     return await this.prisma.doctor.update({
       where: {
         id: doctorId,
       },
       data: {
-        ...data,
+        ...rest,
+        ...(hashedPassword &&  {password:hashedPassword})
       },
     });
   }
@@ -50,17 +63,17 @@ export class DoctorService {
       where: {
         slug,
       },
-      select:{
+      select: {
         name: true,
         photo: true,
         hospital: true,
         slug: true,
-        phone:true,
-        experience:true,
-        speciality:true,
-        qualifications:true,
-        location:true
-      }
+        phone: true,
+        experience: true,
+        speciality: true,
+        qualifications: true,
+        location: true,
+      },
     });
   }
 
@@ -68,6 +81,17 @@ export class DoctorService {
     return await this.prisma.doctor.findFirst({
       where: {
         asuNumber: asu,
+      },
+      select: {
+        name: true,
+        photo: true,
+        hospital: true,
+        slug: true,
+        phone: true,
+        experience: true,
+        speciality: true,
+        qualifications: true,
+        location: true,
       },
     });
   }
