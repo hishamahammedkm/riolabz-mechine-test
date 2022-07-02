@@ -20,6 +20,11 @@ import { GetUser } from '../auth/decorator';
 export class DoctorController {
   constructor(private readonly doctorService: DoctorService) {}
 
+  @Get('/')
+  welcome(){
+    return 'api is working.....'
+  }
+
   @UseGuards(JwtGuard)
   @Post('create')
   create(@Body() createDoctorDto: CreateDoctorDto) {
@@ -36,8 +41,8 @@ export class DoctorController {
     return this.doctorService.findAll(
       latitude,
       longitude,
-      Number(page),
-      Number(limit),
+     page? Number(page):1,
+     limit? Number(limit):10,
     );
   }
 
@@ -53,12 +58,9 @@ export class DoctorController {
     return this.doctorService.findByAsu(asu);
   }
 
-  // @Patch(':id')
-  // update(@Param('id') id: string, @Body() updateDoctorDto: UpdateDoctorDto) {
-  //   return this.doctorService.update(+id, updateDoctorDto);
-  // }
 
-  @UseGuards(JwtGuard)
+
+  // @UseGuards(JwtGuard)
   @Post('/updateProfile')
   updateProfile(
     @Body() @Body() updateDoctorDto: UpdateDoctorDto,

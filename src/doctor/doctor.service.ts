@@ -46,7 +46,9 @@ export class DoctorService {
     const doctors = await this.prisma.doctor.findMany({
       take: limit,
       skip: limit * (page - 1),
-      where: {},
+      where: {
+        
+      },
       select: {
         name: true,
         photo: true,
