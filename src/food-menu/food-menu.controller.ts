@@ -34,8 +34,8 @@ export class FoodMenuController {
   findAll() {
     return this.foodMenuService.findAll();
   }
-
-  @Patch('update/:id')
+  @UseGuards(JwtGuard)
+  @Patch('/update/:id')
   update(
     @GetUser('isAdmin') isAdmin: boolean,
     @Param('id') id: string,
