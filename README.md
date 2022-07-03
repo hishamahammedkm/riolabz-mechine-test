@@ -27,6 +27,7 @@
 [Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
 ## Note
 postman collection added in root directory
+i have created a admin with email =  admin@gmail.com  and password = admin
 ## Installation
 
 ```bash
