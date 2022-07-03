@@ -19,7 +19,7 @@ import {
     }
   
     @HttpCode(HttpStatus.OK)
-    @Post('user/signin')
+    @Post('/signin')
     signin(@Body() dto: AuthDto) {
       return this.authService.signin(dto);
     }

@@ -27,6 +27,7 @@ export class UserController {
     if (!isAdmin) throw new ForbiddenException();
     return this.userService.findAll();
   }
+  @UseGuards(JwtGuard)
   @Post('/update-permission')
   updatePermission(
     @GetUser('isAdmin') isAdmin: boolean,
