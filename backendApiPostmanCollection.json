@@ -1,0 +1,199 @@
+{
+	"info": {
+		"_postman_id": "9d14e242-8408-42ac-a925-582197eef79a",
+		"name": "New Collection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "13578648"
+	},
+	"item": [
+		{
+			"name": "step-1  Signup a user with emaill and password",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": [
+				{
+					"name": "step-1 response",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"email\":\"hisham@gmail.com\",\"password\":\"happy@123\"}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/auth/signup",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"auth",
+								"signup"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "202"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"ca-OjPLpYCUpK8yo2D7r/ejvUGvaLo\""
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 03 Jul 2022 11:29:29 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"access_token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJoaXNoYW1AZ21haWwuY29tIiwiaXNBZG1pbiI6ZmFsc2UsImlhdCI6MTY1Njg0Nzc2OSwiZXhwIjoxNjU2ODUwNzY5fQ.-37W7X2XGBpS5-YZvUXIgi9zqVjI6vvA4ecSNcgiyhg\"\n}"
+				}
+			]
+		},
+		{
+			"name": "step-2 Update Profile.  password can also change",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "step-3 Login as  admin. al ready created a admin.",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "step-4 admin see all users ,take token from step 3",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": [
+				{
+					"name": "list of users",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhZG1pbkBnbWFpbC5jb20iLCJpc0FkbWluIjp0cnVlLCJpYXQiOjE2NTY4NDg1NzAsImV4cCI6MTY1Njg1MTU3MH0.tbZYv6bvjfNoDSNvLRsTkcDgsADQQbPK8WiT8kcOeAs",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:3000/user/find-all-users",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"user",
+								"find-all-users"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "431"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"1af-4Z+F7x3KpNlVhZ+hG0pur4teCKY\""
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 03 Jul 2022 11:46:18 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"id\": \"62c17bf9d9844ba9ec7aebc9\",\n        \"email\": \"admin@gmail.com\",\n        \"name\": null,\n        \"phone\": null,\n        \"place\": null,\n        \"password\": \"$argon2i$v=19$m=16,t=2,p=1$aGpraXV5dHI$c2K2RpPM0g5+Sc2tOulpaQ\",\n        \"isAdmin\": true\n    },\n    {\n        \"id\": \"62c17d983a8e418c3daaeb85\",\n        \"email\": \"hisham@gmail.com\",\n        \"name\": \"Hisham\",\n        \"phone\": \"9497481733\",\n        \"place\": \"Nilambur\",\n        \"password\": \"$argon2i$v=19$m=4096,t=3,p=1$VvKAH0c/eiF0pOWkQ0jZ9g$FT05ZqZnceM43Qsb1/GB/3JQIvLz5kI3B1jLJZCFRcU\",\n        \"isAdmin\": false\n    }\n]"
+				}
+			]
+		},
+		{
+			"name": "step-5 admin change a user to admin user ,use admin token and take user id from step 4 response",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "step-6 admin create food menu. take admin token",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "step -7  any logged user can see food menu",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "step-8 admin edit the menu ,take item id from step-7 and take admin token",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		}
+	]
+}
