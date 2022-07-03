@@ -16,6 +16,7 @@ model User {
   name  String
   phone String?
   place String ?
+  password String
   isAdmin Boolean @default(false)
 
 
