@@ -6,48 +6,23 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
+  provider = "mongodb"
   url      = env("DATABASE_URL")
 }
 
 model User {
-  createdAt DateTime @default(now())
+  id    String  @id @default(auto()) @map("_id") @db.ObjectId
+  email String  @unique
+  name  String
+  phone String?
+  place String ?
+  isAdmin Boolean @default(false)
 
-  firstName String?
-  id        String   @id @default(cuid())
-  lastName  String?
-  password  String
-  roles     String[]
-  updatedAt DateTime @updatedAt
-  username  String   @unique
+
 }
 
-model Doctor {
-  asuNumber  String   @unique
-  createdAt  DateTime @default(now())
-  email      String?
-  experience String?
-  hospital   String?
-  id         Int      @id @default(autoincrement())
-  location   String?
-
-  name           String
-  password       String?
-  phone          String?
-  photo          String?
-  qualifications String?
-  slug           String?
-  speciality     String?
-  updatedAt      DateTime? @updatedAt
-}
-
-model Page {
-  about     String
-  createdAt DateTime @default(now())
-  founders  String
-  id        String   @id @default(cuid())
-  members   String
-  office    String
-  other     String?
-  updatedAt DateTime @updatedAt
+model FoodMenu {
+  id    String @id @default(auto()) @map("_id") @db.ObjectId
+  name  String
+  price Float
 }
