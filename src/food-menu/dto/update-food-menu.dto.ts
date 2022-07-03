@@ -3,7 +3,6 @@ import { IsNotEmpty, IsString } from 'class-validator';
 import { CreateFoodMenuDto } from './create-food-menu.dto';
 
 export class UpdateFoodMenuDto extends PartialType(CreateFoodMenuDto) {
-  @IsNotEmpty()
-  @IsString()
+  
   id: string;
 }
