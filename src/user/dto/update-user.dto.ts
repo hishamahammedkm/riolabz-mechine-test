@@ -8,3 +8,9 @@ export class UpdateUserDto extends PartialType(CreateUserDto) {
     phone:string
     password:string
 }
+
+export class updateUserPermissionDto  {
+    status:boolean
+    id:string
+  
+}
